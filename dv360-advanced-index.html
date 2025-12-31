@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DV360 전문가 퀴즈 - 주제별 학습</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .quiz-card.campaign {
+            border-top: 5px solid #4CAF50;
+        }
+
+        .quiz-card.targeting {
+            border-top: 5px solid #2196F3;
+        }
+
+        .quiz-card.bidding {
+            border-top: 5px solid #FF9800;
+        }
+
+        .quiz-card.optimization {
+            border-top: 5px solid #E91E63;
+        }
+
+        .quiz-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .quiz-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .difficulty {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .difficulty.medium {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+
+        .question-count {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DV360 전문가 퀴즈</h1>
+            <p>실무 기반 학습 로드맵 - 주제별 심화 학습</p>
+        </header>
+
+        <div class="quiz-grid">
+            <a href="dv360-quiz-campaign.html" class="quiz-card campaign">
+                <div class="quiz-icon">📋</div>
+                <h2>캠페인 구조 & 설정</h2>
+                <p>Partner부터 Creative까지의 계층 구조, 캠페인 생성 프로세스, 네이밍 규칙 등을 학습합니다.</p>
+                <div class="quiz-meta">
+                    <span class="difficulty medium">중급</span>
+                    <span class="question-count">15문제</span>
+                </div>
+            </a>
+
+            <a href="dv360-quiz-targeting.html" class="quiz-card targeting">
+                <div class="quiz-icon">🎯</div>
+                <h2>타겟팅 전략</h2>
+                <p>오디언스 타겟팅, Contextual Targeting, Customer Match, Lookalike 등 고급 타겟팅 기법을 마스터합니다.</p>
+                <div class="quiz-meta">
+                    <span class="difficulty medium">중급</span>
+                    <span class="question-count">15문제</span>
+                </div>
+            </a>
+
+            <a href="dv360-quiz-bidding.html" class="quiz-card bidding">
+                <div class="quiz-icon">💰</div>
+                <h2>입찰 & 예산 관리</h2>
+                <p>Fixed Bid부터 Target CPA, Target ROAS까지 다양한 입찰 전략과 예산 페이싱을 학습합니다.</p>
+                <div class="quiz-meta">
+                    <span class="difficulty medium">중급</span>
+                    <span class="question-count">15문제</span>
+                </div>
+            </a>
+
+            <a href="dv360-quiz-optimization.html" class="quiz-card optimization">
+                <div class="quiz-icon">📈</div>
+                <h2>최적화 & 성과 분석</h2>
+                <p>성과 지표 분석, A/B 테스트, Device/Time 최적화, Full-Funnel 전략 등을 학습합니다.</p>
+                <div class="quiz-meta">
+                    <span class="difficulty medium">중급</span>
+                    <span class="question-count">15문제</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>총 60문제 | 실무 경험 기반 학습 | 더에이미디어 송희원 자료 기반</p>
+        </div>
+    </div>
+</body>
+</html>

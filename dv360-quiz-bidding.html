@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DV360 퀴즈 - 입찰 & 예산 관리</title>
+    <link rel="stylesheet" href="dv360-advanced-style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-header">
+            <h1>입찰 & 예산 관리</h1>
+            <div class="topic-badge bidding">Bidding & Budget</div>
+            <div class="score-board">
+                <span>점수: <span id="score">0</span></span>
+                <span>문제: <span id="current-question">1</span>/<span id="total-questions">15</span></span>
+            </div>
+        </div>
+
+        <div id="quiz-container">
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+            </div>
+
+            <div class="answers-container" id="answers-container"></div>
+
+            <div class="button-container">
+                <button id="next-btn" class="btn-next" style="display: none;">다음 문제</button>
+            </div>
+        </div>
+
+        <div id="result-container" style="display: none;">
+            <h2>퀴즈 완료!</h2>
+            <p class="final-score">최종 점수: <span id="final-score"></span>/15</p>
+            <p id="result-message"></p>
+            <div class="result-actions">
+                <button id="restart-btn" class="btn-restart">다시 시작하기</button>
+                <a href="dv360-advanced-index.html" class="btn-home">주제 선택으로</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="dv360-quiz-bidding.js"></script>
+</body>
+</html>

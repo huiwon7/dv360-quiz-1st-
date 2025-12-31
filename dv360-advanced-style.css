@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.quiz-header h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.topic-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.topic-badge.campaign {
+    background: #4CAF50;
+}
+
+.topic-badge.targeting {
+    background: #2196F3;
+}
+
+.topic-badge.bidding {
+    background: #FF9800;
+}
+
+.topic-badge.optimization {
+    background: #E91E63;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.question-container {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border-left: 5px solid #667eea;
+}
+
+.question-container h2 {
+    color: #333;
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+.answers-container {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.answer-btn {
+    background: white;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    color: #333;
+}
+
+.answer-btn:hover {
+    background: #f0f0f0;
+    border-color: #667eea;
+    transform: translateX(5px);
+}
+
+.answer-btn.selected {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.answer-btn.correct {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+    animation: correctPulse 0.5s ease;
+}
+
+.answer-btn.incorrect {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+    animation: shake 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.answer-btn:disabled {
+    cursor: not-allowed;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.btn-next, .btn-restart, .btn-home {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+.btn-next:hover, .btn-restart:hover, .btn-home:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+}
+
+#result-container {
+    text-align: center;
+}
+
+#result-container h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.final-score {
+    font-size: 2.5rem;
+    color: #667eea;
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+#result-message {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.result-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .quiz-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .question-container h2 {
+        font-size: 1.1rem;
+    }
+
+    .score-board {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .result-actions {
+        flex-direction: column;
+    }
+
+    .btn-next, .btn-restart, .btn-home {
+        width: 100%;
+    }
+}
