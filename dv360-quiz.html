@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google DV360 초보자 퀴즈</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-header">
+            <h1>Google DV360 초보자 퀴즈</h1>
+            <div class="score-board">
+                <span>점수: <span id="score">0</span></span>
+                <span>문제: <span id="current-question">1</span>/<span id="total-questions">10</span></span>
+            </div>
+        </div>
+
+        <div id="quiz-container">
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+            </div>
+
+            <div class="answers-container" id="answers-container">
+                <!-- 답변 버튼들이 여기에 동적으로 생성됩니다 -->
+            </div>
+
+            <div class="button-container">
+                <button id="next-btn" class="btn-next" style="display: none;">다음 문제</button>
+            </div>
+        </div>
+
+        <div id="result-container" style="display: none;">
+            <h2>퀴즈 완료!</h2>
+            <p class="final-score">최종 점수: <span id="final-score"></span>/10</p>
+            <p id="result-message"></p>
+            <button id="restart-btn" class="btn-restart">다시 시작하기</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
