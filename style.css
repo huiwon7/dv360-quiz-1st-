@@ -103,6 +103,27 @@ body {
     cursor: not-allowed;
 }
 
+.explanation-box {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    display: none;
+}
+
+.explanation-box h3 {
+    color: #856404;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.explanation-box p {
+    color: #856404;
+    line-height: 1.6;
+    margin: 0;
+}
+
 .button-container {
     text-align: center;
 }
@@ -163,5 +184,21 @@ body {
     .score-board {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .explanation-box {
+        padding: 15px;
+        margin: 15px 0;
+        font-size: 0.95rem;
+    }
+
+    .explanation-box h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .explanation-box p {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 }
