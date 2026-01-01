@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>해설 테스트</title>
+    <link rel="stylesheet" href="dv360-advanced-style.css">
+</head>
+<body>
+    <div class="container" style="margin: 50px auto; max-width: 800px;">
+        <h1>해설 기능 테스트</h1>
+
+        <button onclick="showExplanation()" style="padding: 15px 30px; font-size: 1.2rem; margin: 20px 0;">
+            해설 보기
+        </button>
+
+        <div id="explanation-box" class="explanation-box" style="display: none;">
+            <h3>💡 해설</h3>
+            <p id="explanation-text">이것은 테스트 해설입니다. 이 텍스트가 보이면 해설 기능이 정상 작동하는 것입니다!</p>
+        </div>
+    </div>
+
+    <script>
+        function showExplanation() {
+            const explanationBox = document.getElementById('explanation-box');
+            const explanationText = document.getElementById('explanation-text');
+
+            console.log('showExplanation 함수 실행됨');
+            console.log('explanationBox:', explanationBox);
+            console.log('explanationText:', explanationText);
+
+            explanationBox.style.display = 'block';
+            explanationBox.style.visibility = 'visible';
+            explanationBox.style.opacity = '1';
+
+            console.log('해설 박스 표시 완료');
+        }
+    </script>
+</body>
+</html>
