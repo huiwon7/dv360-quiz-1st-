@@ -192,7 +192,8 @@ function saveApiKey() {
         geminiApiKey = key;
         localStorage.setItem('geminiApiKey', key);
         apiModal.style.display = 'none';
-        alert('API 키가 저장되었습니다! 틀린 문제에 대해 AI 해설을 받을 수 있습니다.');
+        console.log('API 키 저장됨:', key.substring(0, 10) + '...');
+        alert(`API 키가 저장되었습니다!\n키 앞부분: ${key.substring(0, 10)}...\n틀린 문제에 대해 AI 해설을 받을 수 있습니다.`);
     } else {
         alert('API 키를 입력해주세요.');
     }
@@ -247,9 +248,15 @@ ${allAnswers.map((a, i) => `${i + 1}. ${a}`).join('\n')}
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error('API Error:', errorData);
-            throw new Error(`API 요청 실패: ${response.status}`);
+            let errorData;
+            try {
+                errorData = await response.json();
+            } catch (e) {
+                errorData = await response.text();
+            }
+            console.error('API Error Details:', errorData);
+            console.error('API Key (first 10 chars):', geminiApiKey.substring(0, 10) + '...');
+            throw new Error(`API 요청 실패 (${response.status}): ${JSON.stringify(errorData)}`);
         }
 
         const data = await response.json();
