@@ -267,16 +267,22 @@ function showResults() {
     let message = '';
     const percentage = (score / quizData.length) * 100;
 
-    if (percentage === 100) {
-        message = '완벽합니다! 캠페인 구조를 완전히 마스터하셨네요!';
-    } else if (percentage >= 80) {
-        message = '훌륭합니다! DV360 캠페인 설정에 자신감을 가져도 됩니다!';
-    } else if (percentage >= 60) {
-        message = '좋아요! 기본은 탄탄하네요. 조금만 더 복습하면 완벽해질 거예요!';
-    } else if (percentage >= 40) {
-        message = '괜찮습니다! 학습 자료를 다시 한번 읽어보시면 도움이 될 거예요!';
+    if (percentage >= 80) {
+        message = '🎉 축하드립니다! 합격하셨습니다!\n\n';
+        if (percentage === 100) {
+            message += '완벽합니다! 캠페인 구조를 완전히 마스터하셨네요!';
+        } else {
+            message += '훌륭합니다! DV360 캠페인 설정에 자신감을 가져도 됩니다!';
+        }
     } else {
-        message = '기초부터 차근차근 다시 학습해보세요. 캠페인 구조가 모든 것의 시작입니다!';
+        message = '😢 아쉽네요! 불합격 하셨습니다!\n인생은 도전 아닙니까?\n\n';
+        if (percentage >= 60) {
+            message += '좋아요! 기본은 탄탄하네요. 조금만 더 복습하면 완벽해질 거예요!';
+        } else if (percentage >= 40) {
+            message += '괜찮습니다! 학습 자료를 다시 한번 읽어보시면 도움이 될 거예요!';
+        } else {
+            message += '기초부터 차근차근 다시 학습해보세요. 캠페인 구조가 모든 것의 시작입니다!';
+        }
     }
 
     resultMessage.textContent = message;
