@@ -387,8 +387,17 @@ function restart() {
 nextBtn.addEventListener('click', nextQuestion);
 restartBtn.addEventListener('click', restart);
 
+// API 키 재설정
+function resetApiKey() {
+    localStorage.removeItem('geminiApiKey');
+    geminiApiKey = '';
+    apiModal.style.display = 'block';
+    document.getElementById('api-key-input').value = '';
+}
+
 // 윈도우 객체에 함수 등록
 window.saveApiKey = saveApiKey;
 window.skipApiKey = skipApiKey;
+window.resetApiKey = resetApiKey;
 
 init();
