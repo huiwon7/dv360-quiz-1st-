@@ -286,6 +286,30 @@ function showResults() {
     }
 
     resultMessage.textContent = message;
+
+    // 점수 저장
+    saveScore('입찰 & 예산 관리', score, quizData.length);
+}
+
+// 점수 저장 함수
+function saveScore(quizName, score, totalQuestions) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    const scoresKey = `scores_${currentUser}`;
+    let scores = JSON.parse(localStorage.getItem(scoresKey) || '[]');
+
+    const scoreData = {
+        quizName: quizName,
+        score: score,
+        totalQuestions: totalQuestions,
+        percentage: ((score / totalQuestions) * 100).toFixed(1),
+        passed: (score / totalQuestions) >= 0.8,
+        date: new Date().toISOString()
+    };
+
+    scores.push(scoreData);
+    localStorage.setItem(scoresKey, JSON.stringify(scores));
 }
 
 function restart() {

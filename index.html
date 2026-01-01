@@ -134,6 +134,123 @@
             font-size: 0.9rem;
         }
 
+        /* 로그인 모달 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #email-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #email-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            transform: scale(1.05);
+        }
+
+        /* 사용자 정보 표시 */
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .user-info span {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .user-info div {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-scores, .btn-logout {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-scores {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-scores:hover {
+            background: #45a049;
+        }
+
+        .btn-logout {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-logout:hover {
+            background: #da190b;
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 2rem;
@@ -146,11 +263,43 @@
             .level-card h2 {
                 font-size: 1.5rem;
             }
+
+            .user-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .user-info div {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-scores, .btn-logout {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 로그인 모달 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>이메일로 로그인</h2>
+            <p>퀴즈 점수를 저장하고 관리하려면 로그인해주세요</p>
+            <input type="email" id="email-input" placeholder="이메일 주소를 입력하세요" />
+            <button onclick="login()" class="btn-login">로그인</button>
+        </div>
+    </div>
+
     <div class="container">
+        <div class="user-info" id="user-info" style="display: none;">
+            <span>👤 <span id="user-email"></span></span>
+            <div>
+                <button onclick="viewScores()" class="btn-scores">내 점수 보기</button>
+                <button onclick="logout()" class="btn-logout">로그아웃</button>
+            </div>
+        </div>
+
         <h1>Google DV360 퀴즈</h1>
         <p>DV360 지식을 테스트하고 실력을 향상시켜보세요!</p>
 
@@ -178,5 +327,83 @@
             모든 기기에서 즐기실 수 있습니다
         </div>
     </div>
+
+    <script>
+        // 로그인 상태 확인
+        function checkLogin() {
+            const currentUser = localStorage.getItem('currentUser');
+            const loginModal = document.getElementById('login-modal');
+            const userInfo = document.getElementById('user-info');
+            const userEmail = document.getElementById('user-email');
+
+            if (currentUser) {
+                // 로그인 되어 있음
+                loginModal.classList.remove('active');
+                userInfo.style.display = 'flex';
+                userEmail.textContent = currentUser;
+            } else {
+                // 로그인 안 됨
+                loginModal.classList.add('active');
+                userInfo.style.display = 'none';
+            }
+        }
+
+        // 로그인
+        function login() {
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                alert('이메일을 입력해주세요.');
+                return;
+            }
+
+            // 간단한 이메일 형식 검증
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('올바른 이메일 형식이 아닙니다.');
+                return;
+            }
+
+            // 로그인 처리
+            localStorage.setItem('currentUser', email);
+
+            // 사용자 점수 데이터 초기화 (없을 경우)
+            const userScores = localStorage.getItem(`scores_${email}`);
+            if (!userScores) {
+                localStorage.setItem(`scores_${email}`, JSON.stringify([]));
+            }
+
+            checkLogin();
+        }
+
+        // 로그아웃
+        function logout() {
+            if (confirm('로그아웃하시겠습니까?')) {
+                localStorage.removeItem('currentUser');
+                checkLogin();
+            }
+        }
+
+        // 내 점수 보기
+        function viewScores() {
+            window.location.href = 'my-scores.html';
+        }
+
+        // Enter 키로 로그인
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('email-input');
+            if (emailInput) {
+                emailInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        login();
+                    }
+                });
+            }
+        });
+
+        // 페이지 로드 시 로그인 상태 확인
+        checkLogin();
+    </script>
 </body>
 </html>
