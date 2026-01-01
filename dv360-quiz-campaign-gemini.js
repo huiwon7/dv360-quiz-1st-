@@ -154,7 +154,7 @@ const quizData = [
 
 // Gemini API 설정
 let geminiApiKey = localStorage.getItem('geminiApiKey') || '';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 // 게임 로직
 let currentQuestion = 0;
