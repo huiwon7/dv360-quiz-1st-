@@ -243,6 +243,13 @@ function selectAnswer(index) {
     // Display explanation
     explanationText.textContent = quizData[currentQuestion].explanation;
     explanationBox.style.display = 'block';
+    explanationBox.style.visibility = 'visible';
+    explanationBox.style.opacity = '1';
+
+    // Scroll to explanation on mobile
+    setTimeout(() => {
+        explanationBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 300);
 
     nextBtn.style.display = 'block';
 }

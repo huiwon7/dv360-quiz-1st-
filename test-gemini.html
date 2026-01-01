@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Gemini API 테스트</title>
+</head>
+<body>
+    <h1>Gemini API 테스트</h1>
+    <button onclick="testApi()">API 테스트</button>
+    <div id="result" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc;"></div>
+
+    <script>
+        async function testApi() {
+            const apiKey = 'AIzaSyBcv8i3qEAfEHAIJoWe0OEbdZrVhUNxSEw';
+            const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '테스트 중...';
+
+            try {
+                const response = await fetch(`${url}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: '안녕하세요. 간단히 인사해주세요.'
+                            }]
+                        }]
+                    })
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText);
+                    resultDiv.innerHTML = `<strong>에러 (${response.status}):</strong><br><pre>${errorText}</pre>`;
+                    return;
+                }
+
+                const data = await response.json();
+                console.log('Success response:', data);
+
+                const text = data.candidates[0].content.parts[0].text;
+                resultDiv.innerHTML = `<strong>성공!</strong><br>${text}`;
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `<strong>에러:</strong><br>${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
