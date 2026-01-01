@@ -154,7 +154,7 @@ const quizData = [
 
 // Gemini API 설정
 let geminiApiKey = localStorage.getItem('geminiApiKey') || '';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent';
 
 // 게임 로직
 let currentQuestion = 0;
@@ -238,20 +238,34 @@ ${allAnswers.map((a, i) => `${i + 1}. ${a}`).join('\n')}
                     parts: [{
                         text: prompt
                     }]
-                }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 500
+                }
             })
         });
 
         if (!response.ok) {
-            throw new Error('API 요청 실패');
+            const errorData = await response.json();
+            console.error('API Error:', errorData);
+            throw new Error(`API 요청 실패: ${response.status}`);
         }
 
         const data = await response.json();
+
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            console.error('Unexpected API response:', data);
+            throw new Error('응답 형식 오류');
+        }
+
         const explanation = data.candidates[0].content.parts[0].text;
         return explanation;
     } catch (error) {
         console.error('Gemini API Error:', error);
-        return '❌ 해설을 불러오는데 실패했습니다. API 키를 확인해주세요.';
+        return `❌ 해설을 불러오는데 실패했습니다.<br>
+                오류: ${error.message}<br>
+                API 키가 올바른지 확인하고, 브라우저 Console(F12)에서 상세 오류를 확인해주세요.`;
     }
 }
 
